@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #483D8B;
+        }
+        .calculadora {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        input[type="numero"] {
+            width: 100%;
+            margin: 10px 0px;
+            padding: 5px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            background-color: 	#836FFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6959CD;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcular IMC</h1>
+    <div class="calculadora">
+        <input type="numero" id="peso" placeholder="Digite seu peso (kg)" step="0.1">
+        <input type="numero" id="altura" placeholder="Digite sua altura (m)" step="0.01">
+        <button onclick="calcularIMC()">Calcular IMC</button>
+        <div class="resultado" id="resultado">Resultado: </div>
+    </div>
+
+    <script>
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            let resultado;
+
+            if (isNaN(peso) || isNaN(peso) || peso <= 0) {
+                resultado = 'Por favor, insira valores válidos.';
+            } else {
+                const imc = peso / (altura * altura);
+                resultado = `Seu IMC é ${imc.toFixed(2)}.`;
+                
+                if (imc < 18.5) {
+                    resultado += " Você está abaixo do peso.";
+                } else if (imc >= 18.5 && imc < 24.9) {
+                    resultado += " Você está com peso normal.";
+                } else if (imc >= 25 && imc < 29.9) {
+                    resultado += " Você está com sobrepeso.";
+                } else {
+                    resultado += " Você está com obesidade.";
+                }
+            }
+
+            document.getElementById('resultado').innerText = resultado;
+        }
+    </script>
+</body>
+</html>
